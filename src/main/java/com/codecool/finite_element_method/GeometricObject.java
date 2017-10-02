@@ -24,5 +24,7 @@ public abstract class GeometricObject {
         return geometricPointList;
     }
 
+    abstract protected List<GeometricPoint> dividingObjectToPoints();
+
     abstract public void deformingObject(Force force);
 }
