@@ -4,8 +4,8 @@ import javafx.geometry.Point2D;
 
 
 public class Force {
-    double magnitude;
-    double angle;
+    private double magnitude;
+    private double angle;
     private Point2D coordinatesOfForce;
 
     public Force(double magnitude, double angle) {
