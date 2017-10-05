@@ -39,11 +39,11 @@ class RodTest {
     void testDeformingRod() {
         Rod rod = new Rod(1.0, 2.0E-2, 2.0E11, 11);
         Force force = new Force(1000.0, 90); // Deforming the rod with 1000N
-        rod.deformingObject(force);
-        assertEquals(0.0, rod.getGeometricPointList().get(0).getY(), 0.000001);
-        assertEquals(-0.001611444, rod.getGeometricPointList().get(3).getY(), 0.000001);
-        assertEquals(-0.00414466, rod.getGeometricPointList().get(5).getY(), 0.000001);
-        assertEquals(-0.007473651, rod.getGeometricPointList().get(7).getY(), 0.000001);
-        assertEquals(-0.013262912, rod.getGeometricPointList().get(10).getY(), 0.000001);
+        Rod deformedRod = rod.deformingObject(force);
+        assertEquals(0.0, deformedRod.getGeometricPointList().get(0).getY(), 0.000001);
+        assertEquals(-0.001611444, deformedRod.getGeometricPointList().get(3).getY(), 0.000001);
+        assertEquals(-0.00414466, deformedRod.getGeometricPointList().get(5).getY(), 0.000001);
+        assertEquals(-0.007473651, deformedRod.getGeometricPointList().get(7).getY(), 0.000001);
+        assertEquals(-0.013262912, deformedRod.getGeometricPointList().get(10).getY(), 0.000001);
     }
 }

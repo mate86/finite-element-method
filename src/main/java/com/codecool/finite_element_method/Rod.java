@@ -4,7 +4,6 @@ import javafx.geometry.Point2D;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 public class Rod {
     private double rodLength;
@@ -41,6 +40,10 @@ public class Rod {
         return geometricPointList;
     }
 
+    private void setGeometricPointList(List<Point2D> geometricPointList) {
+        this.geometricPointList = geometricPointList;
+    }
+
     private List<Point2D> dividingObjectToPoints() {
         List<Point2D> geometricPoints = new ArrayList<>();
         double distanceOfPoints = rodLength / (numberOfPoints - 1);
@@ -53,19 +56,18 @@ public class Rod {
         return geometricPoints;
     }
 
-    public void deformingObject(Force force) {
-        ListIterator iterator = geometricPointList.listIterator();
-        while (iterator.hasNext()) {
-            Point2D point = (Point2D) iterator.next();
-            double coordinateX = point.getX();
-            double coordinateY = calculatingCoordinateY(coordinateX, force);
-            iterator.remove();
-            point = new Point2D(coordinateX, coordinateY);
-            iterator.add(point);
+    public Rod deformingObject(Force force) {
+        List<Point2D> newPointList = new ArrayList<>();
+        for (Point2D point : geometricPointList) {
+            Point2D newPoint = new Point2D(point.getX(), calculatingCoordinateY(point.getX(), force));
+            newPointList.add(newPoint);
         }
+        Rod newRod = new Rod(rodLength, R, E, numberOfPoints);
+        newRod.setGeometricPointList(newPointList);
+        return newRod;
     }
 
     private double calculatingCoordinateY(double coordinateX, Force force) {
-        return (-1) * force.getMagnitude() * Math.sin(Math.toRadians(force.getAngle())) * Math.pow(coordinateX, 2) * (3 * rodLength - coordinateX) / (6 * E * I);
+        return -force.getMagnitude() * Math.sin(Math.toRadians(force.getAngle())) * Math.pow(coordinateX, 2) * (3 * rodLength - coordinateX) / (6 * E * I);
     }
 }
