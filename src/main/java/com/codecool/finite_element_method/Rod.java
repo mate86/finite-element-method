@@ -1,33 +1,51 @@
 package com.codecool.finite_element_method;
 
+import javafx.geometry.Point2D;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Rod extends GeometricObject {
+public class Rod {
+    protected double objectSize;
+    protected int numberOfPoints;
+    protected List<Point2D> geometricPointList;
 
-    public Rod(double rodLength, int numberOfPoints) {
-        this.objectSize = new HashMap<>();
-        this.objectSize.put("x", rodLength);
+    public Rod(double objectSize, int numberOfPoints) {
+        this.objectSize = objectSize;
         this.numberOfPoints = numberOfPoints;
         this.geometricPointList = dividingObjectToPoints();
     }
 
-    @Override
-    protected List<GeometricPoint> dividingObjectToPoints() {
-        List<GeometricPoint> geometricPoints = new ArrayList<>();
-        double rodLength = objectSize.get("x");
-        double distanceOfPoints = rodLength / (numberOfPoints - 1);
+    public double getObjectSize() {
+        return objectSize;
+    }
+
+    public int getNumberOfPoints() {
+        return numberOfPoints;
+    }
+
+    public void setNumberOfPoints(int numberOfPoints) {
+        this.numberOfPoints = numberOfPoints;
+        this.geometricPointList = dividingObjectToPoints();
+    }
+
+    public List<Point2D> getGeometricPointList() {
+        return geometricPointList;
+    }
+
+    protected List<Point2D> dividingObjectToPoints() {
+        List<Point2D> geometricPoints = new ArrayList<>();
+        double distanceOfPoints = objectSize / (numberOfPoints - 1);
         for (int i = 0; i < numberOfPoints - 1; i++) {
-            GeometricPoint newPoint = new PointOfRod(distanceOfPoints * i);
+            Point2D newPoint = new Point2D(distanceOfPoints * i, 0.0);
             geometricPoints.add(newPoint);
         }
-        GeometricPoint newPoint = new PointOfRod(rodLength);
+        Point2D newPoint = new Point2D(objectSize, 0.0);
         geometricPoints.add(newPoint);
         return geometricPoints;
     }
 
-    @Override
     public void deformingObject(Force force) {
+
     }
 }
