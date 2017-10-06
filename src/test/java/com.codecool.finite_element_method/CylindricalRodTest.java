@@ -20,6 +20,15 @@ class CylindricalRodTest {
     }
 
     @Test
+    void testSetCylindricalPointList() {
+        RodFactory rodFactory = new RodFactory();
+        Rod rod = rodFactory.getRod(Shape.CIRCLE, 10, 50.0, 2.0E-2, 2.0E11);
+        assertEquals(10, rod.getGeometricPointList().size());
+        rod.setNumberOfPoints(20);
+        assertEquals(20, rod.getGeometricPointList().size());
+    }
+
+    @Test
     void testDividingCylindricalRodToEqualSections() {
         RodFactory rodFactory = new RodFactory();
         Rod rod = rodFactory.getRod(Shape.CIRCLE, 5, 50.0, 2.0E-2, 2.0E11);

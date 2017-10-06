@@ -20,6 +20,15 @@ class RectangularRodTest {
     }
 
     @Test
+    void testSetRectangularPointList() {
+        RodFactory rodFactory = new RodFactory();
+        Rod rod = rodFactory.getRod(Shape.RECTANGLE, 10, 50.0, 0.03, 0.05, 2.0E11);
+        assertEquals(10, rod.getGeometricPointList().size());
+        rod.setNumberOfPoints(20);
+        assertEquals(20, rod.getGeometricPointList().size());
+    }
+
+    @Test
     void testDividingRectangularRodToEqualSections() {
         RodFactory rodFactory = new RodFactory();
         Rod rod = rodFactory.getRod(Shape.RECTANGLE, 5, 50.0, 0.03, 0.05, 2.0E11);
